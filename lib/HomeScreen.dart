@@ -36,39 +36,6 @@ class Caluclator extends StatelessWidget {
                 ),
               ],
             ),
-            Row(
-              children: [
-                MyButton(title: 'AC'),
-                MyButton(title: 'AC'),
-                MyButton(title: 'AC'),
-                MyButton(
-                  title: 'AC',
-                  mycolor: Colors.yellow,
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                MyButton(title: 'AC'),
-                MyButton(title: '-/+'),
-                MyButton(title: '%'),
-                MyButton(
-                  title: '/',
-                  mycolor: Colors.yellow,
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                MyButton(title: ''),
-                MyButton(title: 'AC'),
-                MyButton(title: 'AC'),
-                MyButton(
-                  title: 'AC',
-                  mycolor: Colors.yellow,
-                ),
-              ],
-            ),
           ],
         ),
       ),
