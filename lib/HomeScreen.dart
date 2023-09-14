@@ -1,7 +1,8 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, unused_local_variable
 
 import 'package:calculaor/components/My_buttons.dart';
 import 'package:flutter/material.dart';
+import 'package:math_expressions/math_expressions.dart';
 
 class Caluclator extends StatefulWidget {
   Caluclator({Key? key});
@@ -11,7 +12,7 @@ class Caluclator extends StatefulWidget {
 }
 
 class _CaluclatorState extends State<Caluclator> {
-  var number = 'a';
+  var number = ' ';
 
   var answer = '';
 
@@ -23,17 +24,30 @@ class _CaluclatorState extends State<Caluclator> {
         child: Column(
           children: [
             Expanded(
-              child: Column(
-                children: [
-                  Text(
-                    number.toString(),
-                    style: TextStyle(fontSize: 40, color: Colors.white),
-                  ),
-                  Text(
-                    answer.toString(),
-                    style: TextStyle(fontSize: 40, color: Colors.white),
-                  ),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: Text(
+                        number.toString(),
+                        style: TextStyle(fontSize: 40, color: Colors.white),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: Text(
+                        answer.toString(),
+                        style: TextStyle(fontSize: 40, color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             Expanded(
@@ -52,11 +66,15 @@ class _CaluclatorState extends State<Caluclator> {
                       ),
                       MyButton(
                         title: '+/-',
-                        onPress: () {},
+                        onPress: () {
+                          // number += '+/-';
+                        },
                       ),
                       MyButton(
                         title: '%',
-                        onPress: () {},
+                        onPress: () {
+                          number += '%';
+                        },
                       ),
                       MyButton(
                         title: '÷',
@@ -197,7 +215,9 @@ class _CaluclatorState extends State<Caluclator> {
                       MyButton(
                         title: 'DEL',
                         onPress: () {
-                          // number += '3';
+                          if (number.length != 0) {
+                            number = number.substring(0, number.length - 1);
+                          }
 
                           setState(() {});
                         },
@@ -206,8 +226,7 @@ class _CaluclatorState extends State<Caluclator> {
                         title: '=',
                         mycolor: Colors.amber,
                         onPress: () {
-                          // number += '+';
-
+                          Solution();
                           setState(() {});
                         },
                       ),
@@ -220,5 +239,21 @@ class _CaluclatorState extends State<Caluclator> {
         ),
       ),
     );
+
+    // ignore: dead_code
+  }
+
+  void Solution() {
+    if (number.length != 0) {
+      String finalNum = number;
+      finalNum = number.replaceAll('x', '*');
+
+      Parser p = Parser();
+      Expression expression = p.parse(finalNum);
+      ContextModel contextModel = ContextModel();
+      double eval = expression.evaluate(EvaluationType.REAL, contextModel);
+      answer = eval.toString();
+      // number = '';
+    }
   }
 }
