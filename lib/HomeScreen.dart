@@ -67,7 +67,7 @@ class _CaluclatorState extends State<Caluclator> {
                       MyButton(
                         title: '+/-',
                         onPress: () {
-                          // number += '+/-';
+                          number += '+/-';
                         },
                       ),
                       MyButton(
